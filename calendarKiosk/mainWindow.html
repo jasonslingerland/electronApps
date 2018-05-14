@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+</head>
+<body>
+  <script type="text/javascript" src="main.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+  <nav>
+    <div class="nav-wrapper green lighten-1">
+      <a class="brand-logo left">Google Calendar scheduler</a>
+      <div class="button.new">
+        <button class="btn new waves-effect waves-light right" onclick="createAddWindow();">Reserve now</button>
+      </div>
+    </div>
+      <div class="fixed-action-btn">
+        <button class="btn-floating btn-large green" onclick="createAddWindow();">
+          <i class="large material-icons">date_range</i>
+        </button>
+      </div>
+  </nav>
+  <ul></ul>
+
+  <script>
+    const electron = require('electron');
+    const {ipcRenderer} = electron;
+    const ul = document.querySelector('ul');
+
+    // Add item
+    ipcRenderer.on('item:add', function(e, item){
+      ul.className = 'collection';
+      const li = document.createElement('li');
+      li.className = 'collection-item';
+      const itemText = document.createTextNode(item);
+      li.appendChild(itemText);
+      ul.appendChild(li);
+    });
+
+    // Clear items
+    ipcRenderer.on('item:clear', function(){
+      ul.innerHTML = '';
+      ul.className = '';
+    });
+
+    ul.addEventListener('dblclick', removeItem);
+
+    function removeItem(e) {
+      e.target.remove();
+      if (ul.children.length == 0) {
+        ul.className = '';
+      }
+    };
+
+  </script>
+</body>
+</html>

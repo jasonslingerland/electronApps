@@ -1,0 +1,14 @@
+{
+  "name": "calendarKiosk",
+  "version": "1.0.0",
+  "description": "Front end app to look at and add Google Calendar events",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Jason",
+  "license": "MIT",
+  "dependencies": {
+    "electron": "^2.0.0"
+  }
+}
