@@ -5,23 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge"> -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
-   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-   <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-  <title>event to calendar</title>
+  <title>Add shopping list item</title>
 </head>
 <body>
-  <script type="text/javascript" src="js/materialize.min.js"></script>
   <div class="container">
     <form>
-      <div class="input-field">
-        <!-- <label>Event title</label> -->
-        <!-- <input type="text" id="item" autofocus> -->
-        <input type="text" value="Input Text" onfocus="this.value=''" onblur="(this.value=='')? this.value='Event name':this.value;" />
+      <div>
+        <label>Enter item</label>
+        <input type="text" id="item" autofocus>
+          <br>
+            <input type='time' defaultTime='now'/>
+          </br>
       </div>
-      <!-- <div class="input-field">
-        <label>Pick time</label>
-        <input type="text" class="datepicker">
-      </div> -->
       <button class="btn waves-effect waves-light" type="submit">Add item</button>
     </form>
   </div>
@@ -39,12 +34,6 @@
       console.log(ipcRenderer);
       ipcRenderer.send('item:add', item);
     }
-
-    // document.addEventListener('DOMContentLoaded', function() {
-    // var elems = document.querySelectorAll('.datepicker');
-    // var instances = M.Datepicker.init(elems, options);
-    // });
-
   </script>
 </body>
 </html>

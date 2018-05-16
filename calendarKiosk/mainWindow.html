@@ -7,19 +7,20 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+  <script src="/Users/jslingerland/electronApps/shoppingList/main.js"></script>
 </head>
 <body>
-  <script type="text/javascript" src="main.js"></script>
-  <script type="text/javascript" src="js/materialize.min.js"></script>
+  <!-- <script type="text/javascript" src="main.js"></script>
+  <script type="text/javascript" src="js/materialize.min.js"></script> -->
   <nav>
     <div class="nav-wrapper green lighten-1">
       <a class="brand-logo left">Google Calendar scheduler</a>
       <div class="button.new">
-        <button class="btn new waves-effect waves-light right" onclick="createAddWindow();">Reserve now</button>
+        <button class="btn right" onclick="createAddWindow() ">Reserve now</button>
       </div>
     </div>
       <div class="fixed-action-btn">
-        <button class="btn-floating btn-large green" onclick="createAddWindow();">
+        <button class="btn-floating btn-large green" onclick="console.log('the button was pressed')">
           <i class="large material-icons">date_range</i>
         </button>
       </div>

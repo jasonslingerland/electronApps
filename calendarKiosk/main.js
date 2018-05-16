@@ -2,17 +2,19 @@ const electron = require('electron');
 const url = require('url');
 const path = require('path');
 
-const {app, BrowserWindow, Menu, ipcMain} = electron;
-
+const {BrowserWindow, app, Menu, ipcMain, ipcRenderer} = electron;
 // SET ENV
 // process.env.NODE_ENV = 'production';
-
 let mainWindow;
 
 // Listen for app to be ready
 app.on('ready', function(){
   mainWindow = new BrowserWindow({});
   // Load html into window
+  mainWindow.on('closed', _ => {
+  console.log('closed')
+  mainWindow = null
+})
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'mainWindow.html'),
     protocol: 'file:',
@@ -30,9 +32,9 @@ app.on('ready', function(){
   Menu.setApplicationMenu(mainMenu);
 });
 
-// Handle create add window
-function BrowserWindow(){};
 function createAddWindow(){
+  // this.BrowserWindow = BrowserWindow;
+  console.log("this opened the popup");
   // Create new window
   addWindow = new BrowserWindow({
     width:300,
@@ -55,7 +57,7 @@ ipcMain.on('item:add', function(e, item){
   mainWindow.webContents.send('item:add', item);
   addWindow.close();
   // Still have a reference to addWindow in memory. Need to reclaim memory (Grabage collection)
-  //addWindow = null;
+  addWindow = null;
 });
 
 // ^ boilerplate
@@ -103,13 +105,6 @@ const mainMenuTemplate = [
         accelerator: process.platform == 'darwin' ? 'Command+N' : 'Ctrl+N',
         click(){
           createAddWindow();
-        }
-      },
-      {
-        label: 'Clear items',
-        accelerator: process.platform == 'darwin' ? 'Command+X' : 'Ctrl+X',
-        click(){
-          mainWindow.webContents.send('item:clear');
         }
       },
       {
